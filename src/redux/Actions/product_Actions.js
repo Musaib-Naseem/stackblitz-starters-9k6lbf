@@ -1,4 +1,6 @@
 export const Show_All_Products = (products) => {
+
+  console.log(products);
   return {
     type: 'All_PRODUCTS',
     payload: products,

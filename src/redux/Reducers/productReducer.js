@@ -11,11 +11,11 @@ const initialState = {
 
 export const productReducer = (state = initialState, action) => {
 
-  console.log(state)
+  console.log(action.payload)
   switch (action.type) {
     case 'All_PRODUCTS':
       return {
-        ...state,
+        ...state,products:action.payload
       };
 
       break;
