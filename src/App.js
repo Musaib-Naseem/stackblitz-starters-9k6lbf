@@ -17,7 +17,7 @@ export default function App() {
      <Routes>
 
      <Route path="/"   element={ <All_Products /> }/>
-     <Route path="/product/:productId"  element={ <Selected_Products />} />
+     <Route path="/product/:productIdd"  element={ <Selected_Products />} />
      <Route>Page not Found</Route>
 
      </Routes>

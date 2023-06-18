@@ -1,76 +1,42 @@
-import React,{useEffect} from "react";
-import {useSelector,useDispatch} from "react-redux";
-import {Show_All_Products} from "../redux/Actions/product_Actions";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  Show_All_Products,
+  fetchAllProducts,
+} from '../redux/Actions/product_Actions';
+import { Link } from 'react-router-dom';
 
+const All_Products = () => {
+  const product = useSelector((state) => state.allProducts.products);
 
-const All_Products=()=>{
+  const dispatch = useDispatch();
 
-const product = useSelector((state) => state.allProducts.products);
+  // console.log(product);
 
-const dispatch = useDispatch();
+  const { id, name, category } = product;
 
-console.log(product);
+  useEffect(() => {
+    dispatch(fetchAllProducts());
+  }, []);
 
-const {id,name,category} = product;
-
-const fetchApi = async()=>{
-
-  const response = await fetch('https://fakestoreapi.com/products').then((res)=>
-
-  res.json()
-
-
-
-  )
-
-
-  useDispatch(Show_All_Products(response))
-
-  console.log(response)
-
-}
-
-
-useEffect(()=>{
-
-  fetchApi()
-
-},[])
-
-
-
-return(
- 
-  <div>
-  <h1>All Products Are Here</h1>
-{
-
-product.map((data)=>{
-
-  const {id,image,category,price} = data;
-
-  return(
-
+  return (
     <div>
+      <h1>All Products Are Here</h1>
+      {product.map((data) => {
+        const { id, image, category, price } = data;
 
-    <p> { id }</p>
-    <img src={image} />
-    <p> { category} </p>
-
+        return (
+          <Link to={`/product/${id}`}>
+            <div key={id} style={{ border: '1px solid #000' }}>
+              <p> {id}</p>
+              <img src={image} style={{ width: '200px' }} />
+              <p> {category} </p>
+            </div>
+          </Link>
+        );
+      })}
     </div>
-
-)
-
-
-
-})
-
-
-}
-  </div>
-)
-
-
-}
+  );
+};
 
 export default All_Products;

@@ -8,17 +8,37 @@ const initialState = {
   ],
 };
 
+export const productReducer = (state = initialState, actions) => {
+  console.log(actions.payload);
 
-export const productReducer = (state = initialState, action) => {
-
-  console.log(action.payload)
-  switch (action.type) {
+  switch (actions.type) {
     case 'All_PRODUCTS':
       return {
-        ...state,products:action.payload
+        ...state,
+        products: actions.payload,
+      };
+
+    case 'fetch_Products':
+      return {
+        ...state,
+        products: actions.payload,
       };
 
       break;
+
+    default:
+      return state;
+  }
+};
+
+export const selectedReducer = (state = {}, actions) => {
+  console.log(actions.payload)
+  switch (actions.type) {
+    case 'SELECTED_PRODUCT':
+      return { ...state, ...actions.payload };
+
+    case 'REMOVE_SELECTED_PRODUCT':
+      return {};
 
     default:
       return state;
